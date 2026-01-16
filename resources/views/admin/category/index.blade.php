@@ -108,7 +108,7 @@
 
     <script>
         function openEditModal(button) {
-            const name = button.dataset.nama;
+            const name = button.dataset.name;
             const id = button.dataset.id;
             const form = document.querySelector('#edit_modal form');
             

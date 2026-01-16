@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             EventSeeder::class,
             TicketSeeder::class,
             OrderSeeder::class,
-            HistorySeeder::class,
+            // HistorySeeder::class,
         ]);
     }
 }
