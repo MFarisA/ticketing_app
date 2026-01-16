@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -30,16 +31,9 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
-        $validatedData = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'tanggal_waktu' => 'required|date',
-            'lokasi' => 'required|string|max:255',
-            'kategori_id' => 'required|exists:kategoris,id',
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $validatedData = $request->validated();
 
         // Handle file upload
         if ($request->hasFile('gambar')) {
@@ -80,19 +74,12 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EventRequest $request, string $id)
     {
         try {
             $event = Event::findOrFail($id);
 
-            $validatedData = $request->validate([
-                'judul' => 'required|string|max:255',
-                'deskripsi' => 'required|string',
-                'tanggal_waktu' => 'required|date',
-                'lokasi' => 'required|string|max:255',
-                'kategori_id' => 'required|exists:kategoris,id',
-                'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
+            $validatedData = $request->validated();
 
             // Handle file upload
             if ($request->hasFile('gambar')) {
