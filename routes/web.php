@@ -21,21 +21,21 @@ Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
-Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-
-    Route::resource('categories', CategoryController::class);
-    Route::resource('events', EventController::class);
-    Route::resource('tickets', TiketController::class);
-
-    Route::get('/histories', [HistoriesController::class, 'index'])->name('histories.index');
-    Route::get('/histories/{id}', [HistoriesController::class, 'show'])->name('histories.show');
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::resource('categories', CategoryController::class);
+        Route::resource('events', EventController::class);
+        Route::resource('tickets', TiketController::class);
+
+        Route::get('/histories', [HistoriesController::class, 'index'])->name('histories.index');
+        Route::get('/histories/{id}', [HistoriesController::class, 'show'])->name('histories.show');
+    });
 });
 
 require __DIR__.'/auth.php';

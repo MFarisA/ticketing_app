@@ -35,7 +35,7 @@
                             <th>{{ $index + 1 }}</th>
                             <td>{{ $category->name }}</td>
                             <td>
-                                <button class="btn btn-sm btn-primary mr-2" onclick="openEditModal(this)" data-id="{{ $category->id }}" data-nama="{{ $category->name }}">Edit</button>
+                                <button class="btn btn-sm btn-primary mr-2" onclick="openEditModal(this)" data-id="{{ $category->id }}" data-name="{{ $category->name }}">Edit</button>
                                 <button class="btn btn-sm bg-red-500 text-white" onclick="openDeleteModal(this)" data-id="{{ $category->id }}">Hapus</button>
                             </td>
                         </tr>
